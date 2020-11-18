@@ -47,7 +47,7 @@ module.exports.run = async (bot, message, args) => {
   fs.writeFileSync("bot/db2.json", data);  // obs:This works because the code is being run only once, if i need to read and write many times in a loop i need to do in a diferent way
 
   if (send_message !== "") message.channel.send(send_message);
-  else message.channel.send("There is nothing new")
+  else message.channel.send("Não há nenhuma novidade")
 
 
 };
