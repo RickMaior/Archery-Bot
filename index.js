@@ -3,6 +3,17 @@
 // git commit -m "lembrete de alteracao"
 // git push origin master
 
+
+//keep bot on
+
+let pings = 0;
+setInterval(() => {
+  pings++;
+  
+  require('node-fetch')('https://glitch.com/~archery-t').then(() => console.log(`[${pings}] Ping`));
+}, 5 * 60 * 1000);
+
+// end of keep bot on
 require('dotenv').config()
 
 

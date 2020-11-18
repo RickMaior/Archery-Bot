@@ -12,6 +12,7 @@
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "ms": "^2.1.2",
+    "node-fetch": "^2.6.1",
     "rss-parser": "^3.9.0",
     "string-argv": "^0.3.0",
     "superagent": "^5.1.0"
