@@ -55,7 +55,14 @@ module.exports.run = async (bot, message, args) => {
       console.log(err)
     })
   }else{
-    webhook.send("No news for now");
+    bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
+    .then((webhook) => {
+      webhook.send("No news for now");
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+   
     console.log("No news for this time")}
 
 
