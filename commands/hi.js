@@ -5,7 +5,7 @@ const ms = require("ms");
 
 
 module.exports.run = async (bot, message, args) => {
-  message.member.send("Did you missed me? \nDont worry, i dont run ");
+  message.member.send("Did you missed me? \nDont worry, i dont run away");
   console.log("server -> " + message.guild);
 
 
