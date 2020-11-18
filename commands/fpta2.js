@@ -54,7 +54,9 @@ module.exports.run = async (bot, message, args) => {
     .catch((err) => {
       console.log(err)
     })
-  }else{console.log("No news for this time")}
+  }else{
+    webhook.send("No news for now");
+    console.log("No news for this time")}
 
 
 
