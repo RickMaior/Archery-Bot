@@ -17,13 +17,14 @@ app.get('/', (req, res) => {
 });
 
 app.listen(process.env.PORT);
-
+ /*
 let pings = 0;
 setInterval(() => {
   pings++;
   
   require('node-fetch')('https://glitch.com/~archery-t').then(() => console.log(`[${pings}] Ping`));
 }, 5 * 60 * 1000);
+*/
 
 // end of keep bot on
 require('dotenv').config()

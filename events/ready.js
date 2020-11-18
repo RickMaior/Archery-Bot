@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const ms = require("ms");
 const activity = "Ping me";
-const  fpta  = require("../commands/fpta2.js")
+const fpta = require("../commands/fpta2.js")
 
 module.exports = async bot => {
   bot.user.setActivity(activity);
@@ -20,9 +20,16 @@ module.exports = async bot => {
 
   fpta.run(bot)
 
-  setInterval(runHooks,3600000); //  each hour -> 3600000
+  let pings = 0;
+  setInterval(() => {
+    pings++;
 
-  function runHooks(){
+    require('node-fetch')('https://glitch.com/~archery-t').then(() => console.log(`[${pings}] Ping`));
+  }, 5 * 60 * 1000);
+
+  setInterval(runHooks, 3600000); //  each hour -> 3600000
+
+  function runHooks() {
     fpta.run(bot)
   }
 };
