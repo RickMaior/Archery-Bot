@@ -10,7 +10,7 @@ module.exports = async (bot, guild) => {
   console.log("I just connected to-> " + guild)
 
   if (welcome) {
-    welcome.send("Hi everione, now you can relax, i am here");
+    welcome.send("Hi everyone, now you can relax, i am here");
   } else {
     messsage.defaultChannel.send("Hi everione, now you can relax, i am here here");
   }
