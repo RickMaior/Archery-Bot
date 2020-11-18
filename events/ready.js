@@ -20,7 +20,7 @@ module.exports = async bot => {
 
   fpta.run(bot)
 
-  setInterval(runHooks,600000); //  each hour -> 3600000
+  setInterval(runHooks,3600000); //  each hour -> 3600000
 
   function runHooks(){
     fpta.run(bot)
