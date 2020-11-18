@@ -6,6 +6,8 @@
 
 //keep bot on
 
+// TEST ON glitch
+
 let pings = 0;
 setInterval(() => {
   pings++;
