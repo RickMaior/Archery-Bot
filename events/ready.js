@@ -24,7 +24,7 @@ module.exports = async bot => {
   setInterval(() => {
     pings++;
 
-    require('node-fetch')('https://glitch.com/~archery-t').then(() => console.log(`[${pings}] Ping`));
+    require('node-fetch')('https://isitup.org/archery-t.glitch.me.json/').then(() => console.log(`[${pings}] Ping`));
   }, 5 * 60 * 1000);
 
   setInterval(runHooks, 3600000); //  each hour -> 3600000
