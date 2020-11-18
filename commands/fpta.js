@@ -6,57 +6,53 @@ const fs = require('fs');
 
 module.exports.run = async (bot, message, args) => {
 
+  let rawdata = fs.readFileSync('bot/db2.json');
+  let db = JSON.parse(rawdata);
+
+  let mostRecent = parseInt(db.mostRecent) || 0;
+  console.log("most recent = " + mostRecent + "+ " + db.mostRecent)
+  let newMostRecent = mostRecent;
 
 
-    let mostRecent = 0;
-    console.log("most recent = " + mostRecent)
-    let newMostRecent = mostRecent;
+
+
+  let feed = await parser.parseURL('https://www.fpta.pt/feed/');
+  // https://www.fpta.pt/feed/
+  let send_message = "";
 
 
 
-    let send_message = "";
-    let feed = await parser.parseURL('https://www.fpta.pt/feed/');
 
-    for await (const item of feed.items) {
-        console.log(item.title + ' : ' + item.link + " + guid: +" + item.guid);
+  console.log('\n' + feed.title);
+
+  for await (const item of feed.items) {
+
+    var match = item.guid.match(/[0-9]+$/)
+    if (match) {
+      var guid = parseInt(match[0]);
+      console.log("guid = " + guid)
+
+      if (guid > mostRecent) {
         send_message = send_message + '\n ' + item.title + ' : ' + item.link;
-    };
+        console.log(item.title + ' : ' + item.link + " + guid: + " + guid);
+        if (guid > newMostRecent) { newMostRecent = guid; }
+      } else console.log("too old + " + `${mostRecent} vs ` + guid)
+    }
+  };
 
-    if(send_message !== "")message.channel.send(send_message) ;
-    else message.channel.send("There is nothing new")
+  mostRecent = { mostRecent: newMostRecent };
+  // db = mostRecent;
+  console.log("The most recent is " + mostRecent.mostRecent)
+  let data = JSON.stringify(mostRecent);
+  fs.writeFileSync("bot/db2.json", data);  // obs:This works because the code is being run only once, if i need to read and write many times in a loop i need to do in a diferent way
 
+  if (send_message !== "") message.channel.send(send_message);
+  else message.channel.send("There is nothing new")
 
-    /*
-     
-   
-   
-   
-   
-     console.log('\n' + feed.title);
-   
-     for await (const item of feed.items) {
-       guid = parseInt(item.guid)
-       if (guid > mostRecent) {
-         send_message = send_message + '\n ' + item.title + ' : ' + item.link;
-         console.log(item.title + " " + guid + ' : ' + item.link);
-         if (guid > newMostRecent) { newMostRecent = guid; }
-       } else console.log("too old + " + `${mostRecent} vs ` + guid)
-   
-     };
-   
-     mostRecent = { mostRecent: newMostRecent };
-    
-     console.log("The most recent is " + mostRecent.mostRecent)
-     
-     
-     if(send_message !== "")message.channel.send(send_message) ;
-     else message.channel.send("There is nothing new")
-   */
 
 };
-
 module.exports.help = {
-    name: "FPTA",
-    command: "fpta",
-    aliases: ["flecha"],
+  name: "FPTA",
+  command: "fpta",
+  aliases: ["flecha"],
 };
