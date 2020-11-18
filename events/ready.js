@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const ms = require("ms");
 const activity = "Ping me";
+const  fpta  = require("../commands/fpta2.js")
 
 module.exports = async bot => {
   bot.user.setActivity(activity);
@@ -16,6 +17,14 @@ module.exports = async bot => {
   console.log("Servers: " + bot.guilds.size);
 
   console.log("Bot has been successfully loaded.");
+
+  fpta.run(bot)
+
+  setInterval(runHooks,3600000);
+
+  function runHooks(){
+    fpta.run(bot)
+  }
 };
 
 module.exports.help = {
