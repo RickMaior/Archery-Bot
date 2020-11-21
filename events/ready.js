@@ -20,12 +20,6 @@ module.exports = async bot => {
 
   fpta.run(bot)
 
-  let pings = 0;
-  setInterval(() => {
-    pings++;
-
-    require('node-fetch')('https://isitup.org/archery-t.glitch.me').then(() => console.log(`[${pings}] Ping`));
-  }, 5 * 60 * 1000);
 
   setInterval(runHooks, 3600000); //  each hour -> 3600000
 
