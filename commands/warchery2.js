@@ -50,7 +50,7 @@ module.exports.run = async (bot, message, args) => {
         bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
             .then((webhook) => {
 
-                webhook.edit({ name: "World Archery" }).then((webhook) => webhook.send(send_message))
+                webhook.edit({ name: "World Archery", avatar:'../images/worldarchery.png' }).then((webhook) => webhook.send(send_message))
             })
             .catch((err) => {
                 console.log(err)
