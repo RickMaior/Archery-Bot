@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
   if (send_message !== "") {
     bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
       .then((webhook) => {
-        webhook.edit({ name: "FPTA" }).then((webhook) => webhook.send(send_message))
+        webhook.edit({ name: "FPTA", avatar:'./images/fpta.png'  }).then((webhook) => webhook.send(send_message))
       })
       .catch((err) => {
         console.log(err)
@@ -60,7 +60,7 @@ module.exports.run = async (bot, message, args) => {
   } else {
     bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
       .then((webhook) => {
-         if(message) webhook.edit({ name: "FPTA" }).then((webhook) => webhook.send("No news for now - FPTA"))
+         if(message) webhook.edit({ name: "FPTA", avatar:'./images/fpta.png'  }).then((webhook) => webhook.send("No news for now - FPTA"))
       })
       .catch((err) => {
         console.log(err)
