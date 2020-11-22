@@ -6,6 +6,9 @@ const fs = require('fs');
 
 module.exports.run = async (bot, message, args) => {
 
+    if (message && !message.member.hasPermission("MANAGE_WEBHOOKS"))
+    return message.channel.send("YOU HAVE NO PERMISSIONS");
+
     let rawdata = fs.readFileSync('bot/db.json');
     let db = JSON.parse(rawdata);
 
