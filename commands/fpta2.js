@@ -60,7 +60,7 @@ module.exports.run = async (bot, message, args) => {
   } else {
     bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
       .then((webhook) => {
-        webhook.edit({ name: "FPTA" }).then((webhook) => webhook.send("No news for now - FPTA"))
+         if(message) webhook.edit({ name: "FPTA" }).then((webhook) => webhook.send("No news for now - FPTA"))
       })
       .catch((err) => {
         console.log(err)
