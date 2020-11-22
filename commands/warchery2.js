@@ -7,7 +7,7 @@ const fs = require('fs');
 module.exports.run = async (bot, message, args) => {
 
     if (message && !message.member.hasPermission("MANAGE_WEBHOOKS"))
-    return message.channel.send("YOU HAVE NO PERMISSIONS");
+        return message.channel.send("YOU HAVE NO PERMISSIONS");
 
     let rawdata = fs.readFileSync('bot/db.json');
     let db = JSON.parse(rawdata);
@@ -49,7 +49,8 @@ module.exports.run = async (bot, message, args) => {
     if (send_message !== "") {
         bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
             .then((webhook) => {
-                webhook.send(send_message);
+
+                webhook.edit({ name: "World Archery" }).then((webhook) => webhook.send(send_message))
             })
             .catch((err) => {
                 console.log(err)
@@ -57,7 +58,7 @@ module.exports.run = async (bot, message, args) => {
     } else {
         bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
             .then((webhook) => {
-                webhook.send("No news for now - WA");
+                webhook.edit({ name: "World Archery" }).then((webhook) => webhook.send("No news for now - WA"))
             })
             .catch((err) => {
                 console.log(err)

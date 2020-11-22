@@ -7,13 +7,13 @@ const fs = require('fs');
 module.exports.run = async (bot, message, args) => {
 
   if (message && !message.member.hasPermission("MANAGE_WEBHOOKS"))
-  return message.channel.send("YOU HAVE NO PERMISSIONS");
+    return message.channel.send("YOU HAVE NO PERMISSIONS");
 
   let rawdata = fs.readFileSync('bot/db2.json');
   let db = JSON.parse(rawdata);
 
   let mostRecent = parseInt(db.mostRecent) || 0;
-  console.log("Saved = " + mostRecent )
+  console.log("Saved = " + mostRecent)
   let newMostRecent = mostRecent;
 
 
@@ -51,22 +51,23 @@ module.exports.run = async (bot, message, args) => {
 
   if (send_message !== "") {
     bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
-    .then((webhook) => {
-      webhook.send(send_message);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }else{
+      .then((webhook) => {
+        webhook.edit({ name: "FPTA" }).then((webhook) => webhook.send(send_message))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  } else {
     bot.fetchWebhook(process.env.WEBHOOKDATAID, process.env.WEBHOOKDATATOKEN)
-    .then((webhook) => {
-      webhook.send("No news for now - FPTA");
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-   
-    console.log("No news for this time ")}
+      .then((webhook) => {
+        webhook.edit({ name: "FPTA" }).then((webhook) => webhook.send("No news for now - FPTA"))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+    console.log("No news for this time ")
+  }
 
 
 
