@@ -4,6 +4,7 @@ const fs = require("fs");
 const ms = require("ms");
 const activity = "Ping me";
 const fpta = require("../commands/fpta2.js")
+const warchery = require("../commands/warchery2.js")
 
 module.exports = async bot => {
   bot.user.setActivity(activity);
@@ -18,13 +19,15 @@ module.exports = async bot => {
 
   console.log("Bot has been successfully loaded.");
 
-  fpta.run(bot)
+  await fpta.run(bot)
+  await warchery.run(bot)
 
 
   setInterval(runHooks, 3600000); //  each hour -> 3600000
 
-  function runHooks() {
-    fpta.run(bot)
+  async function runHooks() {
+    await fpta.run(bot)
+    await warchery.run(bot)
   }
 };
 
